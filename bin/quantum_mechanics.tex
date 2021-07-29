@@ -3,28 +3,87 @@
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{breqn}
-\newtheorem{definition}{Definition}
-\newtheorem{proposition}[definition]{Proposition}
-\newtheorem{exercise}[definition]{Exercise}
-\newtheorem{example}[definition]{Example}
-\newtheorem{question}[definition]{Question}
+\usepackage{physics}
 \title{Quantum Mechanics}
-\author{et. al.}
+\author{}
 \date{2021}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{fact}[definition]{Fact}
+\newtheorem{formula}[definition]{Formula}
+\newtheorem{equations}[definition]{Equations}
 \begin{document}
 
 \maketitle
 
-\begin{definition}[Linear Vector Space]
-\label{0}
-There are these axioms, you see...
-This definition had no references and so has base reference level $0$.
-\end{definition}
-\begin{definition}[Field]
-\label{1}
-A field is the numbers over which a vector space is defined.
-This definition builds off of the following: 
-(\ref{0}), level 0, 
-and so has base reference level 1.
-\end{definition}
+\begin{definition}[Linear Vector Space]\label{0}There are these axioms, you see...
+ 
+ This definition has no references and so has reference level $0$.\end{definition}
+\begin{definition}[Field]\label{1}A field is the numbers over which a vector space is defined.
+ 
+ This definition builds off of the following: (\ref{0}), level 0, and so has reference level 1.\end{definition}
+\begin{definition}[Linear Independence of Vectors]\label{2}A set of vectors $\mathbb{V}$ is said to be linearly independent if the only such
+linear relation $$a_1v_1+a_2v_2+\ldots+a_nv_n=0,$$ where all $v_i\in\mathbb{V}$ and all
+$a_i\in\mathbb{C}$, is the trivial one with all $a_i = 0$. If the set of vectors
+is not linearly independent, we say they are linearly dependent. 
+ 
+ This definition builds off of the following: (\ref{0}), level 0, and so has reference level 1.\end{definition}
+\begin{definition}[Vector Space Dimension]\label{3}
+ 
+ This definition builds off of the following: (\ref{0}), level 0, (\ref{2}), level 1, and so has reference level 2.\end{definition}
+\begin{theorem}[]\label{4}Any vector $\ket{V}$ in an $n$-dimensional space can be written as a
+linear combination of $n$ linearly independent vectors $\ket{1}\ldots\ket{n}$.
+ 
+ This theorem builds off of the following: (\ref{0}), level 0, (\ref{2}), level 1, (\ref{3}), level 2, and so has reference level 3.\end{theorem}
+\begin{theorem}[Vector Basis]\label{5}A set of $n$ linearly independent vectors in an $n$-dimensional space
+ is called a basis.
+ 
+ This theorem builds off of the following: (\ref{0}), level 0, (\ref{2}), level 1, (\ref{3}), level 2, and so has reference level 3.\end{theorem}
+\begin{definition}[Coordinates of a Vector w.r.t. a Basis]\label{6}The coordinates of a vector $\ket{v}$ in a basis $\{\ket{j_i}:i\in I\}$
+ are the cooefficients of the expansion $$\ket{v}=v_1\ket{j_1}+\ldots+v_n\ket{j_n}$$ 
+ of $\ket{v}$ in that basis.
+ 
+ This definition builds off of the following: (\ref{5}), level 3, (\ref{4}), level 3, and so has reference level 4.\end{definition}
+\begin{fact}[]\label{7}The Hamiltonian $H$ of a spring-mass harmonic oscillator is given by\begin{equation}H=\frac{p^2}{2m}+\frac{\omega^2x^2}{2}\end{equation}
+ where $\omega^2=k/m$ is the classical frequency of the oscillating system.
+ 
+ This fact has no references and so has reference level $0$.\end{fact}
+\begin{fact}[]\label{8}The inverted harmonic oscillator changes the sign of the harmonic oscillator,
+ so it has Hamiltonian\begin{equation}H=\frac{p^2}{2m}-\frac{\omega^2x^2}{2}\end{equation}
+ where $\omega^2=k/m$ is the classical frequency of the oscillating system.
+ 
+ This fact builds off of the following: (\ref{7}), level 0, and so has reference level 1.\end{fact}
+\begin{fact}[]\label{9}Put $\omega^2=m^2-\lambda$, then $\lambda<m^2$ describes the
+ regular harmonic oscillator and $\lambda>m^2$ describes the inverted one, while
+ $m^2=\lambda$ is simply a free particle; that is, a particle such that its potential energy
+ is independent of its position.
+ 
+ This fact builds off of the following: (\ref{7}), level 0, (\ref{8}), level 1, and so has reference level 2.\end{fact}
+\begin{formula}[]\label{10}Consider with the following system. 
+ $$\psi(x,t)=\mathcal{N}(t)\exp\left(-\frac{1}{2}\omega_r x^2\right)$$
+ with initial conditions $\psi(x,0)=\psi_0,~\mathcal{N}(0)=\mathcal{N}_0$, 
+ and where $\omega_r=m$.
+ 
+ This formula has no references and so has reference level $0$.\end{formula}
+\begin{definition}[]\label{11}A Hermitian operator is an operator that is equal 
+ to its own conjugate transpose.
+ 
+ This definition has no references and so has reference level $0$.\end{definition}
+\begin{definition}[]\label{12}A Hermitian matrix is a complex square 
+ matrix that is equal to its own conjugate transpose.
+ 
+ This definition has no references and so has reference level $0$.\end{definition}
+\begin{equations}[]\label{13}The equations of motion for the oscillator are $$\dot{x}=
+ \frac{\partial H}{\partial p}=\frac{p}{m},~~~~\dot{p}=-\frac{\partial H}{\partial x}=
+ -m\omega^2 x$$ which, through elimination of $\dot{p}$, becomes
+ $$\ddot{x}=-\omega^2x$$ which easily solves by
+ $$x(t)=A\cos(\omega t+\phi)$$ where $x_0=x(0)=A\cos(\phi)$. Note then that
+ $$E=T+V=\frac{1}{2}m\dot{x}^2+\frac{1}{2}m\omega^2x^2=\frac{1}{2}mA^2\omega^2$$
+ where $E$ is the energy of the classical system.
+ 
+ This equations builds off of the following: (\ref{7}), level 0, and so has reference level 1.\end{equations}
+\begin{fact}[]\label{14}The equation for a quantum oscillator with state $|\psi>$ is
+ $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$
+ 
+ This fact has no references and so has reference level $0$.\end{fact}
 \end{document}
