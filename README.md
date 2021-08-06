@@ -1,6 +1,11 @@
 # MathCourses
 A useful tool for coding LaTeX math courses in Python.
 
+## Project Objectives
+* Assist people in manually writing text in Python, utilising computation in order to, for example, compute properties of pieces of content such as the reference levels (see below).
+* Assist in desynchronous collaborative writing, allowing people to add small amounts of content to a larger project and be automatically credited for and allowing for the forking of content, like a GitHub but for academic writing.
+* Allow for the convenient and customisable creation of human-readable sums of content, using LaTeX encoding of collections of content.
+
 ## How to use
 The math_courses.py file offers any importing script with several convenient methods. Using these methods, the writer can construct a sequences of math course objects, such as definitions, propositions, or casual text, while linking previous objects to later objects with a list of pointers. This puts the mathematics in a certain structure within the code, which can later be utilised by the program to construct some interesting information about the structure of the math, while also printing equivalent latex code that can be compiled out-of-the-box.
 
