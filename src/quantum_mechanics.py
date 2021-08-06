@@ -169,6 +169,15 @@ quantum_oscillator = make_and_add_step(
     $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$"""]
 )
 
+test = make_and_add_step(
+    env_type="test",
+    references=["Time Evolution of Complexity: A Critique of Three Methods"]
+)
+
+test2 = make_and_add_step(
+    env_type="test2",
+    references=[test]
+)
 
 build_output(
     filename="quantum_mechanics"

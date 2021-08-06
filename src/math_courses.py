@@ -1,4 +1,6 @@
+from os import write
 from typing import List
+import math
 import re
 
 class Ordinal():
@@ -110,7 +112,7 @@ class Ordinal():
         """
         if self.subordinates is not None:
             for sub in self.subordinates:
-                if self not in sub.superiors:
+                if type(sub) is not str and self not in sub.superiors:
                     sub.superiors.append(self)
 
     def inform_all_subordinates(self):
@@ -173,6 +175,9 @@ class MathCourseObject(Ordinal, MathCourseStep):
         self.rank = 0
         if self.subordinates is not None:
             for sub in self.subordinates:
+                if type(sub) is str:
+                    self.rank = math.inf
+                    break
                 if sub.rank >= self.rank:
                     self.rank = sub.rank + 1
         self.proof = proof
@@ -425,11 +430,11 @@ def env_wrap(environment: str, content: str, options=None) -> str:
 def wrap(wrapper: str, text: str) -> str:
     return wrapper+text+wrapper
 
-def math(text: str) -> str:
-    return wrap(r" $ ", text)
+# def math(text: str) -> str:
+#     return wrap(r" $ ", text)
 
-def mmath(text: str) -> str:
-    return wrap(r" $$ ", text)
+# def mmath(text: str) -> str:
+#     return wrap(r" $$ ", text)
 
 def enclose(head: str = "", text: str = "") -> str:
     return "\\"+head+'{'+text+'}'
@@ -437,7 +442,7 @@ def enclose(head: str = "", text: str = "") -> str:
 def env_enum(list_to_enum, options=None):
     out = ""
     for item in list_to_enum:
-        out += r"\item "+item
+        out += r"\item "+item+"\n"
     return env_wrap(environment="enumerate", content=out, options=options)
  
 def build_output(filename, title="", author="",
@@ -507,8 +512,21 @@ def build_output(filename, title="", author="",
         elif type(step) is MathCourseObject:
             to_append += "\n \n This "+thm+" references: "
             for ref in step.subordinates:
-                to_append += r"(\ref{"+str(ref.get_index(u.metadata['title']))+r"}), "
-            to_append += r"and is thus rank "+str(step.rank)+"."
+                if type(ref) is str:
+                    ext_refs: ExternalReferences
+                    num = 1
+                    for reff in ext_refs.list_of_references:
+                        if reff.title == ref:
+                            break
+                        num += 1
+                    to_append += r"[\ref{"+str(num)+r"}], "
+                else:
+                    to_append += r"(\ref{"+str(ref.get_index(u.metadata['title']))+r"}), "
+            if step.rank == math.inf:
+                write_step = r"$\infty$"
+            else:
+                write_step = str(step.rank)
+            to_append += r"and is thus rank "+write_step+"."
         if step.env_type is not None:
             to_append = env_wrap(environment=step.env_type, options=step.title, content=to_append)
         if step.environment is not None:
