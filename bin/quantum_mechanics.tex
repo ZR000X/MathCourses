@@ -13,70 +13,68 @@
 \newtheorem{fact}[definition]{Fact}
 \newtheorem{formula}[definition]{Formula}
 \newtheorem{equations}[definition]{Equations}
-\newtheorem{test}[definition]{Test}
-\newtheorem{test2}[definition]{Test2}
 \begin{document}
 
 \maketitle
 
-\begin{tcolorbox}\begin{definition}[Linear Vector Space]\label{0}There are these axioms, you see...
+\begin{tcolorbox}[title=Definition: Linear Vector Space]\begin{definition}[Linear Vector Space]\label{0}There are these axioms, you see...
  
  This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[Field]\label{1}A field is the numbers over which a vector space is defined.
+\begin{tcolorbox}[title=Definition: Field]\begin{definition}[Field]\label{1}A field is the numbers over which a vector space is defined.
  
  This definition references: (\ref{0}), and is thus rank 1.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[Linear Independence of Vectors]\label{2}A set of vectors $\mathbb{V}$ is said to be linearly independent if the only such
+\begin{tcolorbox}[title=Definition: Linear Independence of Vectors]\begin{definition}[Linear Independence of Vectors]\label{2}A set of vectors $\mathbb{V}$ is said to be linearly independent if the only such
 linear relation $$a_1v_1+a_2v_2+\ldots+a_nv_n=0,$$ where all $v_i\in\mathbb{V}$ and all
 $a_i\in\mathbb{C}$, is the trivial one with all $a_i = 0$. If the set of vectors
 is not linearly independent, we say they are linearly dependent. 
  
  This definition references: (\ref{0}), and is thus rank 1.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[Vector Space Dimension]\label{3}The dimension of a vector space is equal to the minimum number of linearly independent vectors it requires to be spanned.
+\begin{tcolorbox}[title=Definition: Vector Space Dimension]\begin{definition}[Vector Space Dimension]\label{3}The dimension of a vector space is equal to the minimum number of linearly independent vectors it requires to be spanned.
  
  This definition references: (\ref{0}), (\ref{2}), and is thus rank 2.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{fact}[]\label{4}Any vector $\ket{V}$ in an $n$-dimensional space can be written as a
+\begin{tcolorbox}[title=Fact]\begin{fact}[]\label{4}Any vector $\ket{V}$ in an $n$-dimensional space can be written as a
 linear combination of $n$ linearly independent vectors $\ket{1}\ldots\ket{n}$.
  
  This fact references: (\ref{0}), (\ref{2}), (\ref{3}), and is thus rank 3.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[Vector Basis]\label{5}A set of $n$ linearly independent vectors in an $n$-dimensional space
+\begin{tcolorbox}[title=Definition: Vector Basis]\begin{definition}[Vector Basis]\label{5}A set of $n$ linearly independent vectors in an $n$-dimensional space
  is called a basis.
  
  This definition references: (\ref{0}), (\ref{2}), (\ref{3}), and is thus rank 3.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[Coordinates of a Vector w.r.t. a Basis]\label{6}The coordinates of a vector $\ket{v}$ in a basis $\{\ket{j_i}:i\in I\}$
+\begin{tcolorbox}[title=Definition: Coordinates of a Vector w.r.t. a Basis]\begin{definition}[Coordinates of a Vector w.r.t. a Basis]\label{6}The coordinates of a vector $\ket{v}$ in a basis $\{\ket{j_i}:i\in I\}$
  are the cooefficients of the expansion $$\ket{v}=v_1\ket{j_1}+\ldots+v_n\ket{j_n}$$ 
  of $\ket{v}$ in that basis.
  
  This definition references: (\ref{5}), (\ref{4}), and is thus rank 4.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{fact}[]\label{7}The Hamiltonian $H$ of a spring-mass harmonic oscillator is given by\begin{equation}H=\frac{p^2}{2m}+\frac{\omega^2x^2}{2}\end{equation}
+\begin{tcolorbox}[title=Fact]\begin{fact}[]\label{7}The Hamiltonian $H$ of a spring-mass harmonic oscillator is given by\begin{equation}H=\frac{p^2}{2m}+\frac{\omega^2x^2}{2}\end{equation}
  where $\omega^2=k/m$ is the classical frequency of the oscillating system.
  
  This fact has no references is thus rank $0$.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}\begin{fact}[]\label{8}The inverted harmonic oscillator changes the sign of the harmonic oscillator,
+\begin{tcolorbox}[title=Fact]\begin{fact}[]\label{8}The inverted harmonic oscillator changes the sign of the harmonic oscillator,
  so it has Hamiltonian\begin{equation}H=\frac{p^2}{2m}-\frac{\omega^2x^2}{2}\end{equation}
  where $\omega^2=k/m$ is the classical frequency of the oscillating system.
  
  This fact references: (\ref{7}), and is thus rank 1.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}\begin{fact}[]\label{9}Put $\omega^2=m^2-\lambda$, then $\lambda<m^2$ describes the
+\begin{tcolorbox}[title=Fact]\begin{fact}[]\label{9}Put $\omega^2=m^2-\lambda$, then $\lambda<m^2$ describes the
  regular harmonic oscillator and $\lambda>m^2$ describes the inverted one, while
  $m^2=\lambda$ is simply a free particle; that is, a particle such that its potential energy
  is independent of its position.
  
  This fact references: (\ref{7}), (\ref{8}), and is thus rank 2.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}\begin{formula}[]\label{10}Consider with the following system. 
+\begin{tcolorbox}[title=Formula]\begin{formula}[]\label{10}Consider with the following system. 
  $$\psi(x,t)=\mathcal{N}(t)\exp\left(-\frac{1}{2}\omega_r x^2\right)$$
  with initial conditions $\psi(x,0)=\psi_0,~\mathcal{N}(0)=\mathcal{N}_0$, 
  and where $\omega_r=m$.
  
  This formula has no references is thus rank $0$.\end{formula}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[]\label{11}A Hermitian operator is an operator that is equal 
+\begin{tcolorbox}[title=Definition: Hermition Operator]\begin{definition}[Hermition Operator]\label{11}A Hermitian operator is an operator that is equal 
  to its own conjugate transpose.
  
  This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{definition}[]\label{12}A Hermitian matrix is a complex square 
+\begin{tcolorbox}[title=Definition: Hermition Matrix]\begin{definition}[Hermition Matrix]\label{12}A Hermitian matrix is a complex square 
  matrix that is equal to its own conjugate transpose.
  
  This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
-\begin{tcolorbox}\begin{equations}[]\label{13}The equations of motion for the oscillator are $$\dot{x}=
+\begin{tcolorbox}[title=Equations]\begin{equations}[]\label{13}The equations of motion for the oscillator are $$\dot{x}=
  \frac{\partial H}{\partial p}=\frac{p}{m},~~~~\dot{p}=-\frac{\partial H}{\partial x}=
  -m\omega^2 x$$ which, through elimination of $\dot{p}$, becomes
  $$\ddot{x}=-\omega^2x$$ which easily solves by
@@ -85,16 +83,10 @@ linear combination of $n$ linearly independent vectors $\ket{1}\ldots\ket{n}$.
  where $E$ is the energy of the classical system.
  
  This equations references: (\ref{7}), and is thus rank 1.\end{equations}\end{tcolorbox}
-\begin{tcolorbox}\begin{fact}[]\label{14}The equation for a quantum oscillator with state $\ket{\psi}$ is
+\begin{tcolorbox}[title=Fact]\begin{fact}[]\label{14}The equation for a quantum oscillator with state $\ket{\psi}$ is
  $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$
  
  This fact has no references is thus rank $0$.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}\begin{test}[]\label{15}
- 
- This test references: [\ref{4}], and is thus rank $\infty$.\end{test}\end{tcolorbox}
-\begin{tcolorbox}\begin{test2}[]\label{16}
- 
- This test2 references: (\ref{15}), and is thus rank $\infty$.\end{test2}\end{tcolorbox}
 \section*{External References}
 \begin{enumerate}[label={[\arabic*]}]\item A. Bhattacharyya, S. Das, S.S. Haque, B. Underwood. \begin{textit}Cosmological Complexity. \end{textit}(2020). arXiv:2001.08664
 \item R. Jefferson, R.C. Myers. \begin{textit}Circuit complexity in quantum field theory. \end{textit}(2017). arXiv:1707.08570

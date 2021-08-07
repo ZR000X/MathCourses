@@ -134,12 +134,14 @@ eqn_evolution_system = make_and_add_step(
 )
 
 hermitian_operator = make_and_add_step(
+    title="Hermition Operator",
     content=["""A Hermitian operator is an operator that is equal 
     to its own conjugate transpose."""],
     env_type="definition"
 )
 
 hermitian_matrix = make_and_add_step(
+    title="Hermition Matrix",
     content=["""A Hermitian matrix is a complex square 
     matrix that is equal to its own conjugate transpose."""],
     env_type="definition"
@@ -169,15 +171,7 @@ quantum_oscillator = make_and_add_step(
     $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$"""]
 )
 
-test = make_and_add_step(
-    env_type="test",
-    references=["Time Evolution of Complexity: A Critique of Three Methods"]
-)
 
-test2 = make_and_add_step(
-    env_type="test2",
-    references=[test]
-)
 
 build_output(
     filename="quantum_mechanics"

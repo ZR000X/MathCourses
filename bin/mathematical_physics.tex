@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{breqn}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\title{Mathematical Physics}
+\author{Zeddar}
+\date{2021}
+\usepackage{physics}
+\newtheorem{definition}{Definition}
+\newtheorem{Idea}[definition]{Idea}
+\begin{document}
+
+\maketitle
+
+\begin{tcolorbox}[title=Definition: Simple Harmonic Oscillator]\begin{definition}[Simple Harmonic Oscillator]\label{0}Observe the wave $$\psi(x,t)=e^{i(\omega t-kx)}$$ where $\omega=\frac{2\pi}{T}$ is the frequency in $t$, while $T$ is the period in $t$, $k=\frac{2\pi}{\lambda}$ is the frequency in $x$, while $\lambda$ is the period in $x$.
+ 
+ This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Idea: Polynomial Differential Equation]\begin{Idea}[Polynomial Differential Equation]\label{1}Take any polynomial $L(p,q)$ in $p,q$. Replacing $p$ with $\frac{\partial}{\partial t}$ and $q$ with $\frac{\partial}{\partial x}$, getting an equation $L\left(\frac{\partial}{\partial t},\frac{\partial}{\partial t}\right)\psi(x,t)=0$
+ 
+ This Idea references: (\ref{0}), and is thus rank 1.\end{Idea}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: General Fourier Series]\begin{definition}[General Fourier Series]\label{2}On an interval $[-L,L]$, $$f(x)=\sum_{n=-\infty}^{\infty}F_n e^{-i\frac{\pi n}{L}x}$$where $$F_n=\frac{1}{2L}\int_{-L}^L f(t)e^{i\frac{\pi n}{L}t}dt$$
+ 
+ This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
+\section*{External References}
+\begin{enumerate}[label={[\arabic*]}]\end{enumerate}
+\end{document}

@@ -236,10 +236,6 @@ def sure_join(input, joiner=", ") -> str:
         return input
     return joiner.join(input)
 
-# TODO: External references should be a list, and should allow for auto adding at the beginning,
-# each reference being a positive integer, and auto building at the end,
-# with the ability to refer to them throughout the course by a human-ref (not number)
-
 class ExternalReference():
     def __init__(self, title=None, authors=None, keywords=None) -> None:
         self.title: str = title
@@ -326,10 +322,9 @@ class ExternalReferences():
                     self.dict_of_references[ref.title] = ref
             elif list_or_dict_of_references is not None:
                 raise Exception("Trying to create ExternalReference with neither list or dict.")
-            # else list_or_dict_of_references is None
-        else:
-            self.list_of_references = None
-            self.dict_of_references = None
+            else:
+                self.list_of_references = None
+                self.dict_of_references = None
 
     def __str__(self):
         if self.list_of_references is None:
@@ -363,7 +358,6 @@ def set_external_references(list_or_dict_of_references):
     k = ExternalReferences(list_or_dict_of_references)
     r.list_of_references = k.list_of_references
     r.dict_of_references = k.dict_of_references
-    # return r
 
 def make_step(title="", content="", env_type=None, environment=None, references=None, proof=None):
     if env_type is not None or environment is not None or references is not None or proof is not None:
@@ -429,12 +423,6 @@ def env_wrap(environment: str, content: str, options=None) -> str:
 
 def wrap(wrapper: str, text: str) -> str:
     return wrapper+text+wrapper
-
-# def math(text: str) -> str:
-#     return wrap(r" $ ", text)
-
-# def mmath(text: str) -> str:
-#     return wrap(r" $$ ", text)
 
 def enclose(head: str = "", text: str = "") -> str:
     return "\\"+head+'{'+text+'}'
@@ -531,8 +519,14 @@ def build_output(filename, title="", author="",
             to_append = env_wrap(environment=step.env_type, options=step.title, content=to_append)
         if step.environment is not None:
             to_append = env_wrap(environment=step.environment, content=to_append)
-        if type(step) is MathCourseObject:        
-            to_append = env_wrap("tcolorbox", to_append)
+        if type(step) is MathCourseObject:
+            options = ""
+            if step.env_type != "":
+                options = "title="+step.env_type[0].upper()+step.env_type[1:]
+            if step.title != "":
+                options += ": " + step.title
+            title = step.env_type + ": " + step.title
+            to_append = env_wrap("tcolorbox", to_append, options=options)
         latex_output.append(to_append)
 
     latex_output.append(str(ext_refs))
@@ -543,3 +537,43 @@ def build_output(filename, title="", author="",
         for line in latex_output:
             file.write(line+"\n")
         file.close()
+
+# def check_latex(input, square=True, ):
+#     """
+#     This string will automatically check the correctness of brackets,
+#     as well as placeing "\left" and "\right" in front of them appropriately
+#     """
+#     if type(input) is str:
+#         is_string_else_is_step = True
+#     elif issubclass(type(input), MathCourseStep):
+#         is_string_else_is_step = False
+#     else:
+#         raise Exception("Trying to check LaTeX of input neither string nor MathCourseStep.")
+#     if not is_string_else_is_step:
+#         iterate = input
+#     else:
+#         iterate = input.content
+    
+#     stack = [] # types of brackets: $, $$, {, [, (, \{ <-- last 3 should have \left & \right
+#     out = iterate
+#     for i in range(len(iterate)):
+#         if iterate[i] == "$":
+#             if i+1 < len(iterate) and iterate[i+1] == "$":
+#                 if stack[-1] == "$$":
+#                     stack.pop()
+#                 else:
+#                     stack.append("$$")
+#             else:
+#                 if stack[-1] == "$":
+#                     stack.pop()
+#                 else:
+#                     stack.append("$")
+#         elif iterate[i] == "{":
+#             stack.append("{")
+#         elif iterate[i] == "}":
+#             if stack[-1] == "{":
+#                 stack.pop()
+#             else:
+#                 if not is_string_else_is_step:
+#                     raise Exception("LaTeX Error in step :: "+input.title+" :: Stack was "+sure_join(stack))
+#         elif 
