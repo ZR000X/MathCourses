@@ -1,11 +1,11 @@
-from re import I
+# from re import I
 from math_courses import *
 
 set_metadata({
     "author": "Zeddar",
     "association": "Indie Academy Discord Server",
     "title": "Quantum Mechanics",
-    "date": "2021"
+    "date": "August, 2021"
 })
 
 set_external_references(
@@ -171,7 +171,19 @@ quantum_oscillator = make_and_add_step(
     $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$"""]
 )
 
+test= make_and_add_step(
+    title="test",
+    content=["Testing"],
+    env_type="Ladida",
+    references=[quantum_oscillator, "Cosmological Complexity"]
+)
 
+test2= make_and_add_step(
+    title="test2",
+    content=["Testing"],
+    env_type="Test",
+    references=[test]
+)
 
 build_output(
     filename="quantum_mechanics"

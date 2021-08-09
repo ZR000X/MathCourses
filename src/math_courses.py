@@ -4,6 +4,8 @@ import math
 import re
 
 class Ordinal():
+    # TODO: Fix the Ordinal Rank Method: Weird loops do weird things.
+
     """
     An ordinal is simply a set of all things it is greater than.
     """
@@ -502,7 +504,7 @@ def build_output(filename, title="", author="",
             for ref in step.subordinates:
                 if type(ref) is str:
                     ext_refs: ExternalReferences
-                    num = 1
+                    num = 0
                     for reff in ext_refs.list_of_references:
                         if reff.title == ref:
                             break
@@ -537,6 +539,8 @@ def build_output(filename, title="", author="",
         for line in latex_output:
             file.write(line+"\n")
         file.close()
+
+# TODO: Finish this
 
 # def check_latex(input, square=True, ):
 #     """
