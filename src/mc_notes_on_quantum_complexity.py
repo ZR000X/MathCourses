@@ -2,9 +2,9 @@
 from math_courses import *
 
 set_metadata({
-    "author": "Zeddar",
+    "author": "S.G. Schoeman",
     "association": "Indie Academy Discord Server",
-    "title": "Quantum Mechanics",
+    "title": "Notes on Quantum Complexity",
     "date": "August, 2021"
 })
 
@@ -39,21 +39,27 @@ set_external_references(
             authors="S.S. Haque, C. Jana, B. Underwood",
             year="2021",
             DOI="arXiv:2107.08969"
-        )
+        ),
+        ExtRefArticle(
+            title="Complexity Equals Action",
+            authors="A.R. Brown, D.A. Roberts, L. Susskind, B. Swingle, Y. Zhao",
+            year="2016",
+            DOI="arXiv:1509.07876"
+        )       
     ]
 )
 
-def_linear_vector_space = make_and_add_step(
+linear_vector_space = make_and_add_step(
     title="Linear Vector Space",
     env_type="definition",
-    content=[r"There are these axioms, you see..."]
+    content=[r"There are these axioms, you see... "]
 )
 
-def_field = make_and_add_step(
+field = make_and_add_step(
     title="Field",
     env_type="definition",
     content=[r"A field is the numbers over which a vector space is defined."],
-    references=[def_linear_vector_space]
+    references=[linear_vector_space]
 )
 
 def_linear_independence = make_and_add_step(
@@ -65,14 +71,14 @@ linear relation $$a_1v_1+a_2v_2+\ldots+a_nv_n=0,$$ where all $v_i\in\mathbb{V}$ 
 $a_i\in\mathbb{C}$, is the trivial one with all $a_i = 0$. If the set of vectors
 is not linearly independent, we say they are linearly dependent. """
     ],
-    references=[def_linear_vector_space]
+    references=[linear_vector_space]
 )
 
 def_dim_of_vs = make_and_add_step(
     title = "Vector Space Dimension",
     content = ["The dimension of a vector space is equal to the minimum number of linearly " +
     "independent vectors it requires to be spanned."],
-    references=[def_linear_vector_space, def_linear_independence],
+    references=[linear_vector_space, def_linear_independence],
     env_type="definition"
 )
 
@@ -80,7 +86,7 @@ thm_1 = make_and_add_step(
     content=[r"""Any vector $\ket{V}$ in an $n$-dimensional space can be written as a
 linear combination of $n$ linearly independent vectors $\ket{1}\ldots\ket{n}$."""],
     env_type="fact",
-    references=[def_linear_vector_space, def_linear_independence, def_dim_of_vs]
+    references=[linear_vector_space, def_linear_independence, def_dim_of_vs]
 )
 
 def_basis = make_and_add_step(
@@ -88,7 +94,7 @@ def_basis = make_and_add_step(
     content=[r"""A set of $n$ linearly independent vectors in an $n$-dimensional space
         is called a basis."""],
     env_type="definition",
-    references=[def_linear_vector_space, def_linear_independence, def_dim_of_vs]
+    references=[linear_vector_space, def_linear_independence, def_dim_of_vs]
 )
 
 def_coords_wrt_a_basis = make_and_add_step(
@@ -171,20 +177,83 @@ quantum_oscillator = make_and_add_step(
     $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$"""]
 )
 
-test= make_and_add_step(
-    title="test",
-    content=["Testing"],
-    env_type="Ladida",
-    references=[quantum_oscillator, "Cosmological Complexity"]
+ads_cft_correspondence = make_and_add_step(
+    title=r"AdS/CFT correspondence",
+    env_type="External Info",
+    references=["https://en.wikipedia.org/wiki/AdS/CFT_correspondence",
+                "Time Evolution of Complexity: A Critique of Three Methods"]
 )
 
-test2= make_and_add_step(
-    title="test2",
-    content=["Testing"],
-    env_type="Test",
-    references=[test]
+einstein_rosen_bridge = make_and_add_step(
+    title=r"Einstein-Rosen Bridge (Wormhole)",
+    env_type="External Info",
+    references=["https://en.wikipedia.org/wiki/Wormhole",
+                "Time Evolution of Complexity: A Critique of Three Methods"]
 )
+
+complexity_equals_action = make_and_add_step(
+    title=r"Complexity Equals Action",
+    env_type="External Info",
+    references=["Complexity Equals Action"]
+)
+
+vector_space = make_and_add_step(
+    title="Vector Space",
+    content=[r'A vector space (also called a linear space) is a set of objects called vectors, which may be added together and multiplied ("scaled") by numbers, called scalars. They obey specific axioms...'],
+    env_type="definition",
+    references=[linear_vector_space,
+                "https://en.wikipedia.org/wiki/Vector_space"]
+)
+
+binary_operation = make_and_add_step(
+    title="Binary Operation",
+    content=[
+        r"In mathematics, a binary operation or dyadic operation is a calculation that combines two elements (called operands) to produce another element. More formally, a binary operation is an operation of arity two."],
+    env_type="definition",
+    references=["https://en.wikipedia.org/wiki/Binary_operation"]
+)
+
+inner_product_space = make_and_add_step(
+    title="Inner Product Space",
+    env_type="definition",
+    content=[r"An inner product space, or a Hausdorff pre-Hilbert space, is a vector space with a binary operation called an inner product."],
+    references=[vector_space, binary_operation,
+                "https://en.wikipedia.org/wiki/Inner_product_space"]
+)
+
+complete_metric_space = make_and_add_step(
+    title="Complete Metric Space",
+    content=[
+        r"In mathematical analysis, a metric space M is called complete (or a Cauchy space) if every Cauchy sequence of points in M has a limit that is also in M."],
+    env_type="definition",
+    references=["https://en.wikipedia.org/wiki/Complete_metric_space"]
+)
+
+hilbert_space = make_and_add_step(
+    title="Hilbert Space",
+    content=["A Hilbert space H is a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product."],
+    env_type="definition",
+    references=[inner_product_space, complete_metric_space, "https://en.wikipedia.org/wiki/Hilbert_space#Definition_and_illustration"]
+)
+
+unitary_operator = make_and_add_step(
+    title="Unitary Operator",
+    content=["In functional analysis, a unitary operator is a surjective bounded operator on a Hilbert space preserving the inner product. Unitary operators are usually taken as operating on a Hilbert space, but the same notion serves to define the concept of isomorphism between Hilbert spaces."],
+    env_type="definition",
+    references=["https://en.wikipedia.org/wiki/Unitary_operator", hilbert_space, inner_product_space]
+)
+
+quantum_treatment_of_an_inverted_harmonic_oscillator = make_and_add_step(
+    title="Quantum Treatment of an Inverted Harmonic Oscillator (IHO)",
+    env_type="treatment",
+    content=[
+        r"A reference state $\ket{\psi_R}$ is transformed, via a unitary operator $\hat{\mathcal{U}}$, into target state $\ket{\psi_T}$: $$\ket{\psi_T}=\hat{\mathcal{U}}\ket{\psi_R}$$", "Now, say that the operator is but an evolving operator $\hat{\mathcal{U}}=e^{-iHt}$, so $$\ket{\psi_T}=e^{-iHt}\ket{\psi_R}$$"],
+    references=[unitary_operator]
+
+)
+
+
 
 build_output(
-    filename="quantum_mechanics"
+    filename="notes_on_quantum_complexity"
 )

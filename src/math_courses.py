@@ -395,10 +395,10 @@ def required_preamble(title: str, author: str, date: str):
     return [r"\documentclass{article}",
     r"\usepackage[utf8]{inputenc}",
     r"\usepackage{amsthm}",
-    r"\usepackage{amsfonts}",
     r"\usepackage{breqn}",
     r"\usepackage{enumitem}",
     r"\usepackage{tcolorbox}",
+    r"\usepackage{hyperref}",
     r"\title{"+title+"}",
     r"\author{"+author+"}",
     r"\date{"+date+"}"]
@@ -411,7 +411,8 @@ def default_preamble(title: str, author: str, date: str) -> List[str]:
     return list_union(
         start_list=required_preamble(title=title, author=author, date=date),
         then_include=[
-            r"\usepackage{physics}"
+            r"\usepackage{physics}",
+            r"\usepackage{amsfonts}"
         ]        
     )
 
@@ -480,7 +481,17 @@ def build_output(filename, title="", author="",
     latex_output.append(r"\maketitle"+"\n")
     
     # build the course step by step
-    for step in universe.steps:        
+    for step in universe.steps:  
+        errs = check_latex_of_step(step)
+        if errs is not None:
+            say = "We believe we found a (some) LaTeX error(s) in step titled '" + step.title + "' :: \n"
+            for err in errs:
+                say += err + "\n"
+            say += "If you want to continue anyway, just hit enter. Otherwise, type 'Cancel' to cancel."
+            response = input(say)
+            if response.lower() == 'cancel':
+                exit()
+
         if type(step.content) is not list:
             raise Exception("Content ::"+step.title+":: is not a list.")
         to_append = ""
@@ -501,34 +512,43 @@ def build_output(filename, title="", author="",
             to_append += "\n \n This "+thm+" has no references is thus rank $0$."
         elif type(step) is MathCourseObject:
             to_append += "\n \n This "+thm+" references: "
+            has_links = False
             for ref in step.subordinates:
                 if type(ref) is str:
-                    ext_refs: ExternalReferences
-                    num = 0
-                    for reff in ext_refs.list_of_references:
-                        if reff.title == ref:
-                            break
-                        num += 1
-                    to_append += r"[\ref{"+str(num)+r"}], "
+                    if ref.startswith("http"):
+                        to_append += r"\{\href{"+ref+r"}{link}\}, "
+                        has_links = True
+                    else:
+                        ext_refs: ExternalReferences
+                        num = 0
+                        for reff in ext_refs.list_of_references:
+                            if reff.title == ref:
+                                break
+                            num += 1
+                        to_append += r"[\ref{"+str(num)+r"}], "
                 else:
                     to_append += r"(\ref{"+str(ref.get_index(u.metadata['title']))+r"}), "
-            if step.rank == math.inf:
-                write_step = r"$\infty$"
+            if has_links or step.rank == math.inf:
+                write_rank = r"$\infty$"
+                step.rank = math.inf
             else:
-                write_step = str(step.rank)
-            to_append += r"and is thus rank "+write_step+"."
+                write_rank = str(step.rank)
+            to_append += r"and is thus rank "+write_rank+"."
         if step.env_type is not None:
             to_append = env_wrap(environment=step.env_type, options=step.title, content=to_append)
         if step.environment is not None:
             to_append = env_wrap(environment=step.environment, content=to_append)
         if type(step) is MathCourseObject:
-            options = ""
-            if step.env_type != "":
-                options = "title="+step.env_type[0].upper()+step.env_type[1:]
-            if step.title != "":
-                options += ": " + step.title
-            title = step.env_type + ": " + step.title
-            to_append = env_wrap("tcolorbox", to_append, options=options)
+            if step.env_type is None:
+                to_append = env_wrap("tcolorbox", to_append)
+            else:
+                options = "title="
+                if step.env_type != "":
+                    options = "title="+step.env_type[0].upper()+step.env_type[1:]
+                if step.title != "":
+                    options += ": " + step.title
+                title = step.env_type + ": " + step.title
+                to_append = env_wrap("tcolorbox", to_append, options=options)
         latex_output.append(to_append)
 
     latex_output.append(str(ext_refs))
@@ -541,43 +561,85 @@ def build_output(filename, title="", author="",
         file.close()
 
 # TODO: Finish this
+def check_latex_of_step(step):
+    errs = []
+    for line in step.content:
+        err = check_latex_of_string(line)
+        if err is not None:
+            errs.append(err)
+    if len(errs) == 0:
+        return None
+    return errs
 
-# def check_latex(input, square=True, ):
-#     """
-#     This string will automatically check the correctness of brackets,
-#     as well as placeing "\left" and "\right" in front of them appropriately
-#     """
-#     if type(input) is str:
-#         is_string_else_is_step = True
-#     elif issubclass(type(input), MathCourseStep):
-#         is_string_else_is_step = False
-#     else:
-#         raise Exception("Trying to check LaTeX of input neither string nor MathCourseStep.")
-#     if not is_string_else_is_step:
-#         iterate = input
-#     else:
-#         iterate = input.content
+
+def check_latex_of_string(input):    
+    """
+    This string will automatically check the correctness of brackets,
+    as well as placeing "\left" and "\right" in front of them appropriately
+    """
+    if type(input) is not str:
+        raise Exception("Trying to check LaTeX of non-string input.")
+        input = input.content
     
-#     stack = [] # types of brackets: $, $$, {, [, (, \{ <-- last 3 should have \left & \right
-#     out = iterate
-#     for i in range(len(iterate)):
-#         if iterate[i] == "$":
-#             if i+1 < len(iterate) and iterate[i+1] == "$":
-#                 if stack[-1] == "$$":
-#                     stack.pop()
-#                 else:
-#                     stack.append("$$")
-#             else:
-#                 if stack[-1] == "$":
-#                     stack.pop()
-#                 else:
-#                     stack.append("$")
-#         elif iterate[i] == "{":
-#             stack.append("{")
-#         elif iterate[i] == "}":
-#             if stack[-1] == "{":
-#                 stack.pop()
-#             else:
-#                 if not is_string_else_is_step:
-#                     raise Exception("LaTeX Error in step :: "+input.title+" :: Stack was "+sure_join(stack))
-#         elif 
+    # types of brackets: $, $$, {, [, (, \{ <-- last 3 should have \left & \right
+    stack = []
+
+    def error(char=None):
+        err_msg = "LaTeX Error in :: '" + input + \
+            "' :: Stack was " + sure_join(stack) + "."
+        
+        if char != None:
+            err_msg += " Next character was "+char+"."
+
+        return err_msg
+
+    skip_many = 0
+    for i in range(len(input)):
+        if skip_many > 0:
+            skip_many -= 1
+            continue
+        char = input[i]
+        if char == "$":
+            if i+1 < len(input) and input[i+1] == "$":
+                if len(stack) > 0 and stack[-1] == "$$":
+                    stack.pop()
+                    skip_many = 1
+                else:
+                    stack.append("$$")
+                    skip_many = 1
+            else:
+                if len(stack) > 0 and stack[-1] == "$":
+                    stack.pop()
+                else:
+                    stack.append("$")
+        elif char == "{":
+            stack.append("{")
+        elif char == "}":
+            if len(stack) > 0 and stack[-1] == "{":
+                stack.pop()
+            else:
+                return error(char)
+        elif char == "[":
+            stack.append("[")
+        elif char == "]":
+            if len(stack) > 0 and stack[-1] == "[":
+                stack.pop()
+            else:
+                return error(char)
+        elif char == "(":
+            stack.append("(")
+        elif char == ")":
+            if len(stack) > 0 and stack[-1] == "(":
+                stack.pop()
+            else:
+                return error(char)
+        elif char == r"\{":
+            stack.append(r"\{")
+        elif char == r"\}":
+            if len(stack) > 0 and stack[-1] == r"\{":
+                stack.pop()
+            else:
+                return error(char)
+    
+    if len(stack) > 0:
+        return error(char)

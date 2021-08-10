@@ -1,24 +1,26 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
-\usepackage{amsfonts}
 \usepackage{breqn}
 \usepackage{enumitem}
 \usepackage{tcolorbox}
-\title{Quantum Mechanics}
-\author{Zeddar}
+\usepackage{hyperref}
+\title{Notes on Quantum Complexity}
+\author{S.G. Schoeman}
 \date{August, 2021}
 \usepackage{physics}
+\usepackage{amsfonts}
 \newtheorem{definition}{Definition}
 \newtheorem{fact}[definition]{Fact}
 \newtheorem{formula}[definition]{Formula}
 \newtheorem{equations}[definition]{Equations}
-\newtheorem{Ladida}[definition]{Ladida}
+\newtheorem{External Info}[definition]{External Info}
+\newtheorem{treatment}[definition]{Treatment}
 \begin{document}
 
 \maketitle
 
-\begin{tcolorbox}[title=Definition: Linear Vector Space]\begin{definition}[Linear Vector Space]\label{0}There are these axioms, you see...
+\begin{tcolorbox}[title=Definition: Linear Vector Space]\begin{definition}[Linear Vector Space]\label{0}There are these axioms, you see... 
  
  This definition has no references is thus rank $0$.\end{definition}\end{tcolorbox}
 \begin{tcolorbox}[title=Definition: Field]\begin{definition}[Field]\label{1}A field is the numbers over which a vector space is defined.
@@ -88,17 +90,42 @@ linear combination of $n$ linearly independent vectors $\ket{1}\ldots\ket{n}$.
  $$i\hbar\frac{d}{dt}\ket{\psi}=H\ket{\psi}$$
  
  This fact has no references is thus rank $0$.\end{fact}\end{tcolorbox}
-\begin{tcolorbox}[title=Ladida: test]\begin{Ladida}[test]\label{15}Testing
+\begin{tcolorbox}[title=External Info: AdS/CFT correspondence]\begin{External Info}[AdS/CFT correspondence]\label{15}
  
- This Ladida references: (\ref{14}), [\ref{0}], and is thus rank $\infty$.\end{Ladida}\end{tcolorbox}
-\begin{tcolorbox}[title=Ladida: test]\begin{Ladida}[test]\label{16}Testing
+ This External Info references: \{\href{https://en.wikipedia.org/wiki/AdS/CFT_correspondence}{link}\}, [\ref{3}], and is thus rank $\infty$.\end{External Info}\end{tcolorbox}
+\begin{tcolorbox}[title=External Info: Einstein-Rosen Bridge (Wormhole)]\begin{External Info}[Einstein-Rosen Bridge (Wormhole)]\label{16}
  
- This Ladida references: (\ref{15}), and is thus rank $\infty$.\end{Ladida}\end{tcolorbox}
+ This External Info references: \{\href{https://en.wikipedia.org/wiki/Wormhole}{link}\}, [\ref{3}], and is thus rank $\infty$.\end{External Info}\end{tcolorbox}
+\begin{tcolorbox}[title=External Info: Complexity Equals Action]\begin{External Info}[Complexity Equals Action]\label{17}
+ 
+ This External Info references: [\ref{5}], and is thus rank $\infty$.\end{External Info}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Vector Space]\begin{definition}[Vector Space]\label{18}A vector space (also called a linear space) is a set of objects called vectors, which may be added together and multiplied ("scaled") by numbers, called scalars. They obey specific axioms...
+ 
+ This definition references: (\ref{0}), \{\href{https://en.wikipedia.org/wiki/Vector_space}{link}\}, and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Binary Operation]\begin{definition}[Binary Operation]\label{19}In mathematics, a binary operation or dyadic operation is a calculation that combines two elements (called operands) to produce another element. More formally, a binary operation is an operation of arity two.
+ 
+ This definition references: \{\href{https://en.wikipedia.org/wiki/Binary_operation}{link}\}, and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Inner Product Space]\begin{definition}[Inner Product Space]\label{20}An inner product space, or a Hausdorff pre-Hilbert space, is a vector space with a binary operation called an inner product.
+ 
+ This definition references: (\ref{18}), (\ref{19}), \{\href{https://en.wikipedia.org/wiki/Inner_product_space}{link}\}, and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Complete Metric Space]\begin{definition}[Complete Metric Space]\label{21}In mathematical analysis, a metric space M is called complete (or a Cauchy space) if every Cauchy sequence of points in M has a limit that is also in M.
+ 
+ This definition references: \{\href{https://en.wikipedia.org/wiki/Complete_metric_space}{link}\}, and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Hilbert Space]\begin{definition}[Hilbert Space]\label{22}A Hilbert space H is a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product.
+ 
+ This definition references: (\ref{20}), (\ref{21}), \{\href{https://en.wikipedia.org/wiki/Hilbert_space#Definition_and_illustration}{link}\}, and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Definition: Unitary Operator]\begin{definition}[Unitary Operator]\label{23}In functional analysis, a unitary operator is a surjective bounded operator on a Hilbert space preserving the inner product. Unitary operators are usually taken as operating on a Hilbert space, but the same notion serves to define the concept of isomorphism between Hilbert spaces.
+ 
+ This definition references: \{\href{https://en.wikipedia.org/wiki/Unitary_operator}{link}\}, (\ref{22}), (\ref{20}), and is thus rank $\infty$.\end{definition}\end{tcolorbox}
+\begin{tcolorbox}[title=Treatment: Quantum Treatment of an Inverted Harmonic Oscillator (IHO)]\begin{treatment}[Quantum Treatment of an Inverted Harmonic Oscillator (IHO)]\label{24}A reference state $\ket{\psi_R}$ is transformed, via a unitary operator $\hat{\mathcal{U}}$, into target state $\ket{\psi_T}$: $$\ket{\psi_T}=\hat{\mathcal{U}}\ket{\psi_R}$ Now, say that the operator is but an evolving operator $\hat{\mathcal{U}}=e^{-iHt}$, so $$\ket{\psi_T}=e^{-iHt}\ket{\psi_R}$$
+ 
+ This treatment references: (\ref{23}), and is thus rank $\infty$.\end{treatment}\end{tcolorbox}
 \section*{External References}
 \begin{enumerate}[label={[\arabic*]}]\item A. Bhattacharyya, S. Das, S.S. Haque, B. Underwood. \begin{textit}Cosmological Complexity. \end{textit}(2020). arXiv:2001.08664
 \item R. Jefferson, R.C. Myers. \begin{textit}Circuit complexity in quantum field theory. \end{textit}(2017). arXiv:1707.08570
 \item T. Ali, A. Bhattacharyya, S.S. Haque, E.H. Kim, N. Moynihan, J. Murugan. \begin{textit}Chaos and Complexity in Quantum Mechanics. \end{textit}(2020). arXiv:1905.13534
 \item T. Ali, A. Bhattacharyya, S.S. Haque, E.H. Kim, N. Moynihan. \begin{textit}Time Evolution of Complexity: A Critique of Three Methods. \end{textit}(2019). arXiv:1810.02734
 \item S.S. Haque, C. Jana, B. Underwood. \begin{textit}Saturation of Thermal Complexity of Purification. \end{textit}(2021). arXiv:2107.08969
+\item A.R. Brown, D.A. Roberts, L. Susskind, B. Swingle, Y. Zhao. \begin{textit}Complexity Equals Action. \end{textit}(2016). arXiv:1509.07876
 \end{enumerate}
 \end{document}
